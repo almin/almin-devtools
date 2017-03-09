@@ -10,7 +10,7 @@
     "src/"
   ],
   "name": "almin-devtools",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Integrate almin into redux-devtools",
   "main": "lib/almin-devtools.js",
   "scripts": {
