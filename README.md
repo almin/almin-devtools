@@ -19,12 +19,19 @@ Integrate almin into [Redux DevTools Extension](https://github.com/zalmoxisus/re
 ### Installation of DevTools extension
 
 #### 1. For Chrome
+
 - from [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd);
+
 #### 2. For Firefox
+
 - from [Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/remotedev/);
+
 #### 3. For Electron
+
 - just specify `REDUX_DEVTOOLS` in [`electron-devtools-installer`](https://github.com/GPMDP/electron-devtools-installer).
+
 #### 4. For other browsers and non-browser environment
+
 - use [`remote-redux-devtools`](https://github.com/zalmoxisus/remote-redux-devtools). 
 
 ### Installation of almin-devtools
@@ -35,7 +42,7 @@ Install with [npm](https://www.npmjs.com/):
     
 ## Usage
 
-Write connection code in your application.
+Connect from your application to redux-devtools.
 
 ```js
 import { Context, Dispatcher, StoreGroup } from "almin";
@@ -49,7 +56,7 @@ const appContext = new Context({
 });
 // initialize devTools
 const devTools = new AlminDevTools(appContext);
-devTools.connect(); // connect
+devTools.connect(); // connect to redux-devtools
 /* customize redux-devtools options
 devTools.connect({
     features: {
