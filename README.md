@@ -19,19 +19,13 @@ Integrate almin into [Redux DevTools Extension](https://github.com/zalmoxisus/re
 ### Installation of DevTools extension
 
 #### 1. For Chrome
- - from [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd);
- - or build it with `npm i && npm run build:extension` and [load the extension's folder](https://developer.chrome.com/extensions/getstarted#unpacked) `./build/extension`;
- - or run it in dev mode with `npm i && npm start` and [load the extension's folder](https://developer.chrome.com/extensions/getstarted#unpacked) `./dev`.
-
+- from [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd);
 #### 2. For Firefox
- - from [Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/remotedev/);
- - or build it with `npm i && npm run build:firefox` and [load the extension's folder](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Temporary_Installation_in_Firefox) `./build/firefox` (just select a file from inside the dir).
-
+- from [Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/remotedev/);
 #### 3. For Electron
-  - just specify `REDUX_DEVTOOLS` in [`electron-devtools-installer`](https://github.com/GPMDP/electron-devtools-installer).
-
+- just specify `REDUX_DEVTOOLS` in [`electron-devtools-installer`](https://github.com/GPMDP/electron-devtools-installer).
 #### 4. For other browsers and non-browser environment
-  - use [`remote-redux-devtools`](https://github.com/zalmoxisus/remote-redux-devtools). 
+- use [`remote-redux-devtools`](https://github.com/zalmoxisus/remote-redux-devtools). 
 
 ### Installation of almin-devtools
 
