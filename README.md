@@ -4,7 +4,17 @@ Integrate almin into [Redux DevTools Extension](https://github.com/zalmoxisus/re
 
 ![ScreenShot](https://monosnap.com/file/rkqr6ZDlKdmAe49mvfw6NCI0gjJKjb.png)
 
-## Install
+## Features
+
+- Lets you inspect every state and UseCase/dispatch
+- See diff of the state
+- Import/Export log
+
+## Installation
+
+1. Install [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension "Redux DevTools Extension") to browser
+2. Install `almin-devtools` via npm
+3. Connect almin to Redux DevTools Extension
 
 ### Installation of DevTools extension
 
@@ -66,6 +76,10 @@ devTools.init(appContext.getState()); // record initial state
 ```
 
 See [Methods (advanced API) · Redux DevTools Extension](http://extension.remotedev.io/docs/API/Methods.html "Methods (advanced API) · Redux DevTools Extension") for more details.
+
+## Alternative
+
+- [almin/almin-logger: logger for Almin.js](https://github.com/almin/almin-logger "almin/almin-logger: logger for Almin.js")
 
 ## Changelog
 
