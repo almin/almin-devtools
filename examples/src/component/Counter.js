@@ -5,6 +5,7 @@ import AsyncIncreamentalUseCase from "../usecase/AsyncIncreamentalUseCase"
 import IncrementalCounterUseCase from "../usecase/IncrementalCounterUseCase"
 import DecrementalCounterUseCase from "../usecase/DecrementalCounterUseCase"
 import UpDownCounterUseCase from "../usecase/UpDownCounterUseCase"
+import ThrowErrorUseCase from "../usecase/ThrowErrorUseCase"
 import {Context} from "almin"
 import CounterState from "../store/CounterState"
 export default class CounterComponent extends React.Component {
@@ -32,6 +33,10 @@ export default class CounterComponent extends React.Component {
         const both = () => {
             context.useCase(new UpDownCounterUseCase()).execute();
         };
+
+        const throwError = () => {
+            context.useCase(new ThrowErrorUseCase()).execute();
+        };
         const counterState = this.props.counterState;
 
         return (
@@ -41,6 +46,7 @@ export default class CounterComponent extends React.Component {
                 <button onClick={decrement}>Counter --</button>
                 <button onClick={both}>Counter +-</button>
                 <button onClick={parallel}>Counter +- in parallel</button>
+                <button onClick={throwError}>Throw Error</button>
                 <p>
                     Count: {counterState.count}
                 </p>

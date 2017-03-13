@@ -70,6 +70,9 @@ module.exports = class AlminDevTools {
                 this.devTools.send(`UseCase:${meta.useCase.name}`, this.alminContext.getState());
             });
         });
+        this.alminContext.onErrorDispatch((payload, meta) => {
+            this.devTools.error(payload.error.message);
+        });
     }
 
     /**
