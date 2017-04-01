@@ -9,6 +9,52 @@ const withDevTools = (
     typeof window !== 'undefined' && window.devToolsExtension
 );
 
+/**
+ * This connect from Almin's context to DevTools
+ *
+ * - If the state is changed by dispatching
+ *   - When anyone payload is dispatched and the UseCase did executed, send to devTools.
+ *   - When anyone payload is dispatched and the state is changed, send to devTools
+ * - If the state is changed by UseCase
+ *   - When anyone UseCase is completed, send to devTools
+ *
+ * @param {Context} alminContext
+ * @param {*} devTools
+ */
+const contextToDevTools = (alminContext, devTools) => {
+    /**
+     * @type {Object[]}
+     */
+    let currentDispatching = [];
+    const sendDispatched = () => {
+        if (currentDispatching.length > 0) {
+            const currentState = alminContext.getState();
+            currentDispatching.forEach(payload => {
+                devTools.send(payload.type, currentState);
+            });
+            currentDispatching = [];
+        }
+    };
+    alminContext.onDispatch((payload, meta) => {
+        currentDispatching.push(payload);
+    });
+    alminContext.onChange(() => {
+        sendDispatched()
+    });
+    alminContext.onDidExecuteEachUseCase(() => {
+        sendDispatched();
+    });
+    alminContext.onCompleteEachUseCase((payload, meta) => {
+        requestAnimationFrame(() => {
+            devTools.send(`UseCase:${meta.useCase.name}`, alminContext.getState());
+        });
+    });
+    alminContext.onErrorDispatch((payload) => {
+        devTools.error(payload.error.message);
+    });
+}
+
+
 const DefaultDevToolsOptions = {
     features: {
         pause: true, // start/pause recording of dispatched actions
@@ -43,36 +89,7 @@ module.exports = class AlminDevTools {
             return;
         }
         this.devTools = window.devToolsExtension.connect(options);
-        /*
-            will
-            execute
-            did
-            complete
-                onChange store
-                 log
-
-         */
-        let currentDispatching = [];
-        this.alminContext.onDispatch((payload, meta) => {
-            currentDispatching.push(payload);
-        });
-        this.alminContext.onDidExecuteEachUseCase((payload, meta) => {
-            if (currentDispatching.length > 0) {
-                const currentState = this.alminContext.getState();
-                currentDispatching.forEach(payload => {
-                    this.devTools.send(payload.type, currentState);
-                });
-            }
-            currentDispatching = [];
-        });
-        this.alminContext.onCompleteEachUseCase((payload, meta) => {
-            requestAnimationFrame(() => {
-                this.devTools.send(`UseCase:${meta.useCase.name}`, this.alminContext.getState());
-            });
-        });
-        this.alminContext.onErrorDispatch((payload, meta) => {
-            this.devTools.error(payload.error.message);
-        });
+        contextToDevTools(this.alminContext, this.devTools);
     }
 
     /**
