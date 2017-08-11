@@ -41,6 +41,13 @@ const contextToDevTools = (alminContext, devTools) => {
     alminContext.onChange(() => {
         sendDispatched()
     });
+    alminContext.events.onBeginTransaction((payload, meta) => {
+        devTools.send(`Transaction Begin:${meta.transaction.name}`, alminContext.getState())
+    });
+    alminContext.events.onEndTransaction((payload, meta) => {
+        devTools.send(`Transaction End:${meta.transaction.name}`, alminContext.getState())
+    });
+
     alminContext.events.onDidExecuteEachUseCase(() => {
         sendDispatched();
     });
