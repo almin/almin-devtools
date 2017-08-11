@@ -35,24 +35,24 @@ const contextToDevTools = (alminContext, devTools) => {
             currentDispatching = [];
         }
     };
-    alminContext.onDispatch((payload, meta) => {
+    alminContext.events.onDispatch((payload, meta) => {
         currentDispatching.push(payload);
     });
     alminContext.onChange(() => {
         sendDispatched()
     });
-    alminContext.onDidExecuteEachUseCase(() => {
+    alminContext.events.onDidExecuteEachUseCase(() => {
         sendDispatched();
     });
-    alminContext.onCompleteEachUseCase((payload, meta) => {
+    alminContext.events.onCompleteEachUseCase((payload, meta) => {
         requestAnimationFrame(() => {
             devTools.send(`UseCase:${meta.useCase.name}`, alminContext.getState());
         });
     });
-    alminContext.onErrorDispatch((payload) => {
+    alminContext.events.onErrorDispatch((payload) => {
         devTools.error(payload.error.message);
     });
-}
+};
 
 
 const DefaultDevToolsOptions = {
