@@ -52,7 +52,7 @@ const contextToDevTools = (alminContext, devTools) => {
     alminContext.onErrorDispatch((payload) => {
         devTools.error(payload.error.message);
     });
-}
+};
 
 
 const DefaultDevToolsOptions = {
